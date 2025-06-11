@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Frutas</title>
+</head>
+<body>
+
+  <h1>Digite frutas separadas por vírgula:</h1>
+  <input type="text" id="frutasInput" placeholder="Ex: maçã, banana, uva">
+  <button onclick="mostrarFrutas()">Mostrar Frutas</button>
+
+  <div id="saida"></div>
+
+  <script>
+    function mostrarFrutas() {
+      let texto = document.getElementById("frutasInput").value;
+      let frutas = texto.split(",");
+
+      let resultado = "<h2>Suas frutas:</h2>";
+      
+      for (let i = 0; i < frutas.length; i++) {
+        resultado += `<p>${i + 1}. ${frutas[i].trim()}</p>`;
+      }
+
+      document.getElementById("saida").innerHTML = resultado;
+    }
+  </script>
+
+</body>
+</html>

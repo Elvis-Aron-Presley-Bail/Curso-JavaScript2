@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Boletim Interativo</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        .resultado {
+            background: #f3f3f3;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Boletim Interativo</h1>
+
+    <label>Nome do aluno:</label>
+    <input type="text" id="nomeAluno" placeholder="Ex: Elvis">
+
+    <label>Notas (separadas por vírgula):</label>
+    <input type="text" id="notasAluno" placeholder="Ex: 7,8,6">
+
+    <button onclick="cadastrarAluno()">Cadastrar aluno</button>
+
+    <div id="saida"></div>
+
+    <script>
+        let alunos = [];
+
+        function calcularMedia(notas) {
+            let soma = 0;
+            for (let i = 0; i < notas.length; i++) {
+                soma += notas[i];
+            }
+            return soma / notas.length;
+        }
+
+        function verificarSituacao(media) {
+            return media >= 7 ? "Aprovado" : "Reprovado";
+        }
+
+        function cadastrarAluno() {
+            let nome = document.getElementById("nomeAluno").value;
+            let notasInput = document.getElementById("notasAluno").value;
+
+            let notas = notasInput.split(",").map(n => Number(n.trim()));
+
+            let media = calcularMedia(notas);
+            let situacao = verificarSituacao(media);
+
+            alunos.push({ nome, notas, media, situacao });
+
+            mostrarAlunos();
+        }
+
+        function mostrarAlunos() {
+            let saida = document.getElementById("saida");
+            saida.innerHTML = "";
+
+            alunos.forEach(aluno => {
+                saida.innerHTML += `
+                    <div class="resultado">
+                        <strong>Aluno:</strong> ${aluno.nome} <br>
+                        <strong>Notas:</strong> ${aluno.notas.join(", ")} <br>
+                        <strong>Média:</strong> ${aluno.media.toFixed(1)} <br>
+                        <strong>Situação:</strong> ${aluno.situacao}
+                    </div>
+                `;
+            });
+        }
+    </script>
+
+</body>
+</html>
