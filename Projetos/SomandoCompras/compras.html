@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compras</title>
+</head>
+
+<body>
+    
+    <h1>Somando Valores de Compras</h1>
+
+    <input type="text" name="" id="valores" placeholder="Digite os valores">
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="res"></div>
+
+    <script>
+
+        function calcular() {
+
+            let valoresTxt = document.querySelector("#valores").value
+            let valores = valoresTxt.split(",").map(n => Number(n.trim()))
+
+            let total = 0
+
+            for (let i = 0; i < valores.length; i++) {
+                total += valores[i]
+            }
+
+            document.querySelector("#res").innerHTML = `
+            <p>Valores: ${valores.join(' , ')}</p>
+            <p>Total: R$ ${total.toFixed(2)}</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>
