@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cálculo de Média</title>
+</head>
+<body>
+
+  <h1>Digite suas notas separadas por vírgula:</h1>
+  <input type="text" id="notasInput" placeholder="Ex: 7, 8.5, 6">
+  <button onclick="calcularMedia()">Calcular Média</button>
+
+  <div id="saida"></div>
+
+  <script>
+    function calcularMedia() {
+      let texto = document.getElementById("notasInput").value;
+
+      // Transforma o texto em um array de números
+      let notas = texto.split(",").map(n => Number(n.trim()));
+
+      // Soma as notas
+      let soma = 0;
+      for (let i = 0; i < notas.length; i++) {
+        soma += notas[i];
+      }
+
+      // Calcula a média
+      let media = soma / notas.length;
+
+      // Mostra na tela
+      document.getElementById("saida").innerHTML = `
+        <p>Notas: ${notas.join(", ")}</p>
+        <p>Média: ${media.toFixed(2)}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
