@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <h1>Lista de convidados</h1>
+
+    <input type="text" name="" id="nome">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="lista"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let nomeTxt = document.querySelector("#nome")
+            let nome = nomeTxt.value.trim("")
+
+            let novoItem = document.createElement('li')
+            let remover = document.createElement('button')
+            remover.textContent = 'Remover'
+            novoItem.textContent = nome
+            novoItem.appendChild(remover)
+
+            remover.addEventListener('click', () => {
+                novoItem.remove()
+            })
+
+            let lista = document.querySelector("#lista")
+
+            lista.appendChild(novoItem)
+
+            nomeTxt.value = ''
+            nomeTxt.focus()
+
+        }
+
+    </script>
+
+</body>
+
+</html>
