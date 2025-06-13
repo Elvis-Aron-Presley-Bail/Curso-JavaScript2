@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presença em Sala</title>
+    <style>
+        .presente {
+            color: greenyellow;
+        }
+
+        .faltou {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>Presença em Sala de Aula</h1>
+
+    <input type="text" name="" id="nome">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="alunos"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let nome = document.querySelector("#nome")
+            let nomeTxt = nome.value
+            let alunos = document.querySelector("#alunos")
+
+            let aluno = document.createElement("li")
+            aluno.textContent = nomeTxt
+            alunos.appendChild(aluno)
+
+            let botaoFaltou = document.createElement("button")
+            botaoFaltou.textContent = 'Faltou'
+            botaoFaltou.addEventListener('click', function() {
+                aluno.classList.add("faltou")
+                aluno.classList.remove("presente")
+            })
+            
+
+            let botaoPresente = document.createElement("button")
+            botaoPresente.textContent = 'Presente'
+            botaoPresente.addEventListener('click', function() {
+                aluno.classList.add("presente")
+                aluno.classList.remove("faltou")
+            })
+            
+            aluno.appendChild(botaoFaltou)
+            aluno.appendChild(botaoPresente)
+
+            nome.value = ''
+            nome.focus()
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
