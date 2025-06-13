@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+</head>
+
+<body>
+    
+    <h1>Lista de compras</h1>
+
+    <input type="text" name="" id="produtos">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <h2>🛒 Lista de Compras</h2>
+    <ul id="lista"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let produtosTxt = document.querySelector("#produtos")
+            let lista = document.querySelector("#lista")
+
+            let produtos = produtosTxt.value.split(",")
+
+            produtos.forEach((nome) => {
+                let produto = document.createElement("li")
+                produto.textContent = `- ${nome}`
+                lista.appendChild(produto)
+            });
+
+            
+            produtosTxt.value = ''
+            produtosTxt.focus()
+
+        }
+
+    </script>
+
+</body>
+
+</html>
