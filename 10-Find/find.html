@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontos</title>
+</head>
+
+<body>
+    
+    <div id="mostrar"></div>
+
+    <script>
+
+        let jogadores = [
+            { nome: "Carlos", pontos: 12 },
+            { nome: "Marina", pontos: 24 },
+            { nome: "Bruno", pontos: 19 },
+            { nome: "Ana", pontos: 30 },
+            { nome: "Laura", pontos: 8 }
+        ]
+
+        let pontos = jogadores.map(p => p.pontos)
+        let maiorPontuacao = Math.max(...pontos)
+        let menorPontuacao = Math.min(...pontos)
+        let jogadorMaior = jogadores.find(n => n.pontos === maiorPontuacao)
+        let jogadorMenor = jogadores.find(n => n.pontos === menorPontuacao)
+
+        document.querySelector("#mostrar").innerHTML = `
+            <p>Campeão: ${jogadorMaior.nome} com ${maiorPontuacao} pontos</p>
+            <p>Lanterna: ${jogadorMenor.nome} com ${menorPontuacao} pontos</p>
+        `
+
+
+    </script>
+
+</body>
+
+</html>
