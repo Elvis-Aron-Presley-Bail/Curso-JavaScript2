@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Compras</title>
+    <style>
+        .botao {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    margin-left: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    .botao:hover {
+    background-color: darkred;
+    }
+    </style>
 </head>
 
 <body>
@@ -23,12 +38,21 @@
             let produtosTxt = document.querySelector("#produtos")
             let lista = document.querySelector("#lista")
 
-            let produtos = produtosTxt.value.split(",")
+            let produtos = produtosTxt.value.trim().split(",")
 
             produtos.forEach((nome) => {
                 let produto = document.createElement("li")
-                produto.textContent = `- ${nome}`
+                let botao = document.createElement('button')
+                botao.classList.add('botao')
+                botao.textContent = 'Remover'
                 lista.appendChild(produto)
+                produto.textContent = `- ${nome}`
+                produto.appendChild(botao)
+
+                botao.addEventListener("click", () => {
+                    produto.remove()
+                })
+
             });
 
             
