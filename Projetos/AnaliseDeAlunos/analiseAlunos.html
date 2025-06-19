@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analise alunos</title>
+</head>
+
+<body>
+
+    <h1>Análise de Alunos</h1>
+
+    <input type="text" name="" id="alunos">
+    <button onclick="calcular()">Verificar</button>
+
+    <div id="mostrar"></div>
+
+    <script>
+
+        function separarAlunos() {
+            let texto = "Ana-8.5, João-6.2, Carla-9.1, Bruno-4.5"
+            let alunos = texto.split(',').map(str => {
+            let [nome, nota] = str.trim().split('-')
+            return {
+            nome: nome,
+            nota: Number(nota)
+    }
+})
+        }
+
+        function analisarNotas(alunos) {
+            let maiorNota = Math.max(alunos)
+            let menorNota = Math.min(alunos)
+            return {
+                maiorNota, menorNota
+            }
+        }
+
+        function calcularMedia(alunos) {
+            let media = 0
+            alunos.forEach(aluno => {
+                media += aluno
+            });
+            return media / alunos.length
+        }
+
+        function contarSituacao(alunos) {
+            let aprovados = []
+            let reprovados = []
+            alunos.forEach(aluno => {
+                if(aluno >= 7) {
+                    aprovados.push(aluno)
+                } else {
+                    reprovados.push(aluno)
+                }
+            });
+            return {
+                aprovados, reprovados
+            }
+        }
+
+        function conversao() {
+            let texto = "Ana-8.5, João-6.2, Carla-9.1, Bruno-4.5"
+            let alunos = texto.split(',').map(str => {
+            let [nome, nota] = str.trim().split('-')
+            return {
+                nome: nome,
+                nota: Number(nota)
+                }
+            })
+        }
+
+        function calcular() {
+            let {nome, nota} = separarAlunos()
+            let mediaNota = calcularMedia(nota)
+            let maiorNotaTxt = analisarNotas(nota)
+            let menorNotaTxt = analisarNotas(nota)
+            let {aprovados, reprovados} = contarSituacao(nota)
+
+            document.querySelector("#mostrar").innerHTML = `
+                <p>Total de alunos: ${nome.length}</p>
+                <p>Média da turma: ${mediaNota}</p>
+                <p>Maior nota: ${nome} (${maiorNotaTxt})</p>
+                <p>Menor nota: ${nome} (${menorNotaTxt})</p>
+                <p>Aprovados: ${aprovados.length}</p>
+                <p>Reprovados: ${reprovados.length}</p>
+            `
+        }
+
+    </script>
+    
+</body>
+
+</html>
