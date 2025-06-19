@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParImpar2.0</title>
+</head>
+
+<body>
+    
+    <h1>Par ou impar</h1>
+
+    <input type="text" name="" id="numeros" placeholder="Ex: 1, 2, 5...">
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="res"></div>
+
+    <script>
+
+        function separarImpPar(numeros) {
+
+            let par = []
+            let impar = []
+
+            numeros.forEach(numero => {
+                
+                if(numero % 2 === 0) {
+                    par.push(numero)
+                } else {
+                    impar.push(numero)
+                }
+        
+            });
+
+            return{
+                par,
+                impar
+            }
+
+        }
+
+        function maiorMenor(numeros) {
+
+            let maior = Math.max(...numeros)
+            let menor = Math.min(...numeros)
+
+            return {
+                maior,
+                menor
+            }
+
+        }
+
+        function calcularMedia(numeros) {
+            let total = 0
+            numeros.forEach(n => total += n)
+            return total / numeros.length
+        }
+
+        function calcular() {
+
+            let numerosTxt = document.querySelector('#numeros').value
+            let numeros = numerosTxt.split(',').map(n => Number(n.trim()))
+
+            let {par, impar} = separarImpPar(numeros)
+            let {maior, menor} = maiorMenor(numeros)
+            let media = calcularMedia(numeros)
+
+            document.querySelector("#res").innerHTML = `
+                <p>Total de números: ${numeros.length}</p>
+                <p>Pares: ${par.length} → ${par.join(', ')}</p>
+                <p>Ímpares: ${impar.length} → ${impar.join(', ')}</p>
+                <p>Maior número: ${maior}</p>
+                <p>Menor número: ${menor}</p>
+                <p>Média: ${media.toFixed(2)}</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>

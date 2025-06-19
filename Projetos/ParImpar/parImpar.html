@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Par e Impar</title>
+</head>
+
+<body>
+    
+    <h1>Par e Impar</h1>
+
+    <input type="text" name="" id="numeros">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+
+        function adicionar() {
+
+            let numerosTxt = document.querySelector('#numeros')
+            let numeros = numerosTxt.value.split(',')
+
+            let pares = []
+            let impares = []
+
+            numeros.forEach(numero => {
+
+                if(numero % 2 == 0) {
+                    pares.push(numero)
+                } else {
+                    impares.push(numero)
+                }
+
+            });
+
+            let paresTxt = pares.map(n => Number(n.trim()))
+            let imparesTxt = impares.map(n => Number(n.trim()))
+
+            let resultado = document.querySelector('#resultado').innerHTML = `
+            <p>Pares: ${paresTxt} (${pares.length} números)</p>
+            <p>Impares: ${imparesTxt} (${impares.length} números)</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>
