@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas</title>
+    <style>
+        .feito {
+            text-decoration: line-through;
+            color: green
+        }
+        .botaoConcluir {
+            background-color: greenyellow;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .botaoRemover {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>Lista de Tarefas</h1>
+
+    <input type="text" name="" id="texto" placeholder="Diga a tarefa...">
+    <button onclick="adicionar()">Adicionar</button>
+
+    <ul id="tarefas"></ul>
+
+    <p>Total: <span id="total"></span> | Concluidas: <span id="concluidas"></span></p>
+
+    <script>
+
+        function adicionar() {
+
+            let textoTxt = document.querySelector('#texto')
+            let texto = textoTxt.value
+            let tarefas = document.querySelector('#tarefas')
+
+            let tarefa = document.createElement('li')
+            let concluir = document.createElement('button')
+            let remover = document.createElement('button')
+
+            tarefa.textContent = texto
+            concluir.textContent = 'Concluir'
+            remover.textContent = 'Remover'
+
+            concluir.classList.add('botaoConcluir')
+            remover.classList.add('botaoRemover')
+
+            concluir.addEventListener('click', () => {
+                tarefa.classList.add('feito')
+            })
+
+            remover.addEventListener('click', () => {
+                tarefa.remove()
+            })
+
+            tarefas.appendChild(tarefa)
+            tarefa.appendChild(concluir)
+            tarefa.appendChild(remover)
+
+            let total = document.querySelectorAll('li').length
+            let concluidas = document.querySelectorAll('.feito').length
+
+            let totalTxt = document.querySelector('#total')
+            let concluidasTxt = document.querySelector('#concluidas')
+
+            totalTxt.textContent = total
+            concluidasTxt.textContent = concluidas
+
+            textoTxt.value = ''
+            textoTxt.focus()
+
+        }
+
+    </script>
+
+</body>
+
+</html>
