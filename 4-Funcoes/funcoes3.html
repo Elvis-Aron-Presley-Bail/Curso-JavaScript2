@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idades</title>
+</head>
+
+<body>
+
+    <h1>Idades</h1>
+
+    <input type="text" name="" id="idades">
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="total"></div>
+
+    <script>
+
+        function maiorMenor(idades) {
+            let maior = Math.max(...idades)
+            let menor = Math.min(...idades)
+            return {
+                maior, menor
+            }
+        }
+
+        function mediaIdades(idades) {
+            let total = 0
+            idades.forEach(idade => {
+                total += idade
+            });
+            return total / idades.length
+        }
+
+        function menorAdulto(idades) {
+            let maiorDeIdade = []
+            let menorDeIdade = []
+            idades.forEach(idade => {
+                if(idade >= 18) {
+                    maiorDeIdade.push(idade)
+                } else {
+                    menorDeIdade.push(idade)
+                }
+            });
+            return {
+                maiorDeIdade, menorDeIdade
+            }
+        }
+
+        function calcular() {
+            let idadesTxt = document.querySelector('#idades').value
+            let idadesNum = idadesTxt.split(',').map(n => Number(n.trim())) 
+            let {maior, menor} = maiorMenor(idadesNum)
+            let mediaIdade = mediaIdades(idadesNum)
+            let {maiorDeIdade, menorDeIdade} = menorAdulto(idadesNum)
+            document.querySelector("#total").innerHTML = `
+                <p>Mais velho: ${maior}</p>
+                <p>Mais novo: ${menor}</p>
+                <p>Média: ${mediaIdade.toFixed(1)}</p>
+                <p>Menores de idade: ${menorDeIdade.length}</p>
+                <p>Adultos: ${maiorDeIdade.length}</p>
+            `
+        }
+
+    </script>
+    
+</body>
+
+</html>

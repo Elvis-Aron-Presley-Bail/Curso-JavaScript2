@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" id="entrada" placeholder="Ex: 23, 25, 19">
+    <button onclick="calcular()">Calcular</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function maiorMenor(numeros) {
+            let maior = Math.max(...numeros)
+            let menor = Math.min(...numeros)
+
+            return {
+                maior, menor
+            }
+        }
+
+        function media(numeros) {
+
+            let total = 0
+
+            numeros.forEach(numero => {
+                total += numero
+            });
+
+            return total
+        }
+
+        function acimaAbaixo (numeros){
+            let media = media()
+
+            let acimaDaMedia = []
+            let abaixoDaMedia = []
+
+            numeros.forEach(numero => {
+                if(numero > media) {
+                    acimaDaMedia.push(numero)
+                } else {
+                    abaixoDaMedia.push(numero)
+                }
+            });
+
+            return {
+                acimaDaMedia, acimaDaMedia
+            }
+
+        }
+
+        function calcular() {
+
+            let numerosTxt = document.querySelector("#entrada").value
+            let numeros = numerosTxt.split(',').map(n => Number(n.trim()))
+
+            let {maior, menor} = maiorMenor(numeros)
+            let mediaTotal = media(numeros)
+            let {acima, abaixo} = acimaAbaixo(numeros)
+
+            document.querySelector('#resultado').innerHTML = `
+            <p>Maior: ${maior}</p>
+            <p>Menor: ${menor}</p>
+            <p>Media: ${mediaTotal}</p>
+            <p>Acima da media: ${acima.length}</p>
+            <p>Abaixo da media: ${abaixo.length}</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>
