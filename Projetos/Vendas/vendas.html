@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas</title>
+</head>
+
+<body>
+    
+    <h1>Ranking de Vendas</h1>
+    <div id="resultado"></div>
+
+    <script>
+
+        let vendedores = [
+        { nome: "Lucas", vendas: 4500 },
+        { nome: "Marina", vendas: 7200 },
+        { nome: "Carlos", vendas: 3000 },
+        { nome: "Ana", vendas: 9100 },
+        { nome: "Bianca", vendas: 6700 }
+        ]
+
+        function calcularMedia(vendasNum) {
+            let total = 0
+            vendasNum.forEach(venda => {
+                total += venda
+            });
+            return total / vendasNum.length
+        }
+
+        let vendasNum = vendedores.map(vendedor => vendedor.vendas)
+        let maiorVenda = Math.max(...vendasNum)
+        let menorVenda = Math.min(...vendasNum)
+        let melhorVendedor = vendedores.filter(vendedor => vendedor.vendas === maiorVenda)
+        let piorVendedor = vendedores.filter(vendedor => vendedor.vendas == menorVenda)
+        let melhorVendedorNome = melhorVendedor.map(vendedor => vendedor.nome)
+        let piorVendedorNome = piorVendedor.map(vendedor => vendedor.nome)
+
+        let mediaDeVendas = calcularMedia(vendasNum)
+
+        let totalDeVendas = 0
+        vendasNum.forEach(vendas => {
+            totalDeVendas += vendas
+        });
+
+        let acimaDaMedia = vendedores.filter(vendedor => vendedor.vendas > mediaDeVendas)
+        let acimaDaMediaNome = acimaDaMedia.map(vendedor => vendedor.nome)
+
+        document.querySelector('#resultado').innerHTML = `
+            <p>Média de vendas: ${mediaDeVendas}</p>
+            <p>Melhor vendedor: ${melhorVendedorNome}</p>
+            <p>Pior vendedor: ${piorVendedorNome}</p>
+            <p>Vendeu acima da média: ${acimaDaMediaNome}</p>
+            <p>Total de vendas: ${totalDeVendas}</p>
+        `
+
+    </script>
+
+</body>
+
+</html>
