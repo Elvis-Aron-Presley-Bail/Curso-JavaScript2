@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListner</title>
+    <style>
+        .concluida {
+            text-decoration: line-through;
+            color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>Lista de tarefas</h1>
+    <input type="text" name="" id="tarefa">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="tarefas"></ul>
+    <p id="contador">📋 Total de tarefas: 0 | ✅ Concluídas: 0</p>
+
+    <script>
+
+        function adicionar() {
+
+            let tarefaTxt = document.querySelector("#tarefa")
+            let tarefa = tarefaTxt.value
+            let tarefasLista = document.querySelector("#tarefas")
+
+            let novaTarefa = document.createElement('li')
+            let btnConcluir = document.createElement('button')
+            let btnRemover = document.createElement('button')
+
+            novaTarefa.innerHTML = tarefa
+            btnConcluir.innerHTML = 'Concluir'
+            btnRemover.innerHTML = 'Remover'
+
+            btnConcluir.addEventListener('click', () => {
+                novaTarefa.classList.add('concluida')
+                atualizarContador()
+            })
+
+            btnRemover.addEventListener('click', () => {
+                novaTarefa.remove()
+                atualizarContador()
+            })
+
+            tarefasLista.appendChild(novaTarefa)
+            novaTarefa.appendChild(btnConcluir)
+            novaTarefa.appendChild(btnRemover)
+
+            atualizarContador()
+
+            tarefaTxt.value = ''
+            tarefaTxt.focus()
+
+        }
+
+        function atualizarContador() {
+            let total = document.querySelectorAll('#tarefas li').length
+            let concluidas = document.querySelectorAll("#tarefas .concluida").length
+
+            document.querySelector("#contador").textContent =
+            `📋 Total de tarefas: ${total} | ✅ Concluídas: ${concluidas}`
+        }
+
+    </script>
+
+</body>
+
+</html>

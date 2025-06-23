@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Função com Parametros</title>
+</head>
+
+<body>
+    
+    <script>
+
+        let frutas = ['maça', 'banana', 'uva']
+
+        function apresentarFruta(fruta,indice) {
+            console.log(`Fruta ${indice+1}: ${fruta}`)
+        }
+
+        frutas.forEach((fruta, indice) => {
+            apresentarFruta(fruta, indice)
+        });
+
+    </script>
+
+</body>
+
+</html>
