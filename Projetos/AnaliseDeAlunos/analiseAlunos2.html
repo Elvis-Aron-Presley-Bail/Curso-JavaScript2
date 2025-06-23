@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Relatório de Notas</h1>
+    <div id="resultado"></div>
+  
+    <script>
+      let alunos = [
+        { nome: "Ana", nota: 8.5, sala: "A" },
+        { nome: "Bruno", nota: 6.0, sala: "B" },
+        { nome: "Carla", nota: 9.2, sala: "A" },
+        { nome: "Daniel", nota: 4.7, sala: "B" },
+        { nome: "Eva", nota: 7.1, sala: "A" },
+        { nome: "Felipe", nota: 5.9, sala: "B" }
+      ]
+  
+      // 1. Função que calcula a média
+      function calcularMedia(notas) {
+        let total = 0
+  
+        // 👉 some as notas aqui com forEach:
+        notas.forEach(nota => {
+          total += nota
+        })
+  
+        return total / notas.length
+      }
+  
+      // 2. Separe os alunos da sala A
+      let salaA = alunos.filter(aluno => {
+        return aluno.sala === "A"
+      })
+  
+      // 3. Separe os alunos da sala B
+      let salaB = alunos.filter(aluno => {
+        return aluno.sala === "B"
+      })
+  
+      // 4. Pegue só as notas da sala A
+      let notasA = salaA.map(aluno => {
+        return aluno.nota
+      })
+  
+      // 5. Pegue só as notas da sala B
+      let notasB = salaB.map(aluno => {
+        return aluno.nota
+      })
+  
+      // 6. Calcule as médias:
+      let mediaA = calcularMedia(notasA)
+      let mediaB = calcularMedia(notasB)
+  
+      // 7. Calcule a média geral (use todas as notas)
+      let todasAsNotas = alunos.map(aluno => aluno.nota)
+      let mediaGeral = calcularMedia(todasAsNotas)
+  
+      // 8. Filtre alunos acima da média geral
+      let acimaDaMedia = alunos.filter(aluno => {
+        return aluno.nota > mediaGeral
+      })
+  
+      // 9. Mostre os resultados
+      document.querySelector("#resultado").innerHTML = `
+        <p>Média Geral: ${mediaGeral.toFixed(1)}</p>
+        <p>Média Sala A: ${mediaA.toFixed(1)}</p>
+        <p>Média Sala B: ${mediaB.toFixed(1)}</p>
+        <p>Alunos acima da média geral: ${acimaDaMedia.map(a => a.nome).join(', ')}</p>
+      `
+    </script>
+  </body>
+  
+
+</html>
