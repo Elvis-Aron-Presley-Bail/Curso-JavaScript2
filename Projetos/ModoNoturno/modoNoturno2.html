@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista com Tema Noturno</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      transition: 0.4s;
+    }
+    .claro {
+      background-color: white;
+      color: black;
+    }
+    .escuro {
+      background-color: #111;
+      color: white;
+    }
+    .concluida {
+      text-decoration: line-through;
+      color: limegreen;
+    }
+    button {
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body class="claro">
+
+  <h1>🌞 Lista de Tarefas</h1>
+  <button id="botaoTema">🌙 Alternar Tema</button>
+
+  <br><br>
+
+  <input type="text" id="entrada" placeholder="Digite sua tarefa">
+  <button onclick="adicionar()">Adicionar</button>
+
+  <ul id="lista"></ul>
+
+  <p id="contador">📋 Total: 0 | ✅ Concluídas: 0</p>
+
+  <script>
+    let botaoTema = document.querySelector("#botaoTema")
+
+    botaoTema.addEventListener('click', () => {
+      document.body.classList.toggle('escuro')
+      document.body.classList.toggle('claro')
+
+      if (document.body.classList.contains('escuro')) {
+        document.querySelector('h1').textContent = "🌙 Lista de Tarefas"
+        botaoTema.textContent = "🌞 Alternar Tema"
+      } else {
+        document.querySelector('h1').textContent = "🌞 Lista de Tarefas"
+        botaoTema.textContent = "🌙 Alternar Tema"
+      }
+    })
+
+    function adicionar() {
+      let entrada = document.querySelector("#entrada")
+      let texto = entrada.value.trim()
+      if (texto === '') {
+        alert("Digite uma tarefa!")
+        return
+      }
+
+      let li = document.createElement('li')
+      li.textContent = texto
+
+      let btnConcluir = document.createElement('button')
+      btnConcluir.textContent = 'Concluir'
+
+      let btnRemover = document.createElement('button')
+      btnRemover.textContent = 'Remover'
+
+      btnConcluir.addEventListener('click', () => {
+        li.classList.toggle('concluida')
+        atualizarContador()
+      })
+
+      btnRemover.addEventListener('click', () => {
+        li.remove()
+        atualizarContador()
+      })
+
+      li.appendChild(btnConcluir)
+      li.appendChild(btnRemover)
+
+      document.querySelector("#lista").appendChild(li)
+      entrada.value = ''
+      entrada.focus()
+
+      atualizarContador()
+    }
+
+    function atualizarContador() {
+      let total = document.querySelectorAll('#lista li').length
+      let concluidas = document.querySelectorAll('#lista .concluida').length
+      document.querySelector("#contador").textContent =
+        `📋 Total: ${total} | ✅ Concluídas: ${concluidas}`
+    }
+  </script>
+
+</body>
+</html>

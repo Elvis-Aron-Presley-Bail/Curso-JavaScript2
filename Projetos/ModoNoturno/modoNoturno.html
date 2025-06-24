@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claro/Escuro</title>
+    <style>
+        .claro {
+            background-color: white;
+            color: black;
+            transition: 0.5s;
+        }
+        .escuro {
+            background-color: black;
+            color: white;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>🌞 Tema Claro</h1>
+    <button id="botao">Alterar tema</button>
+
+    <script>
+
+        let botao = document.querySelector("#botao")
+        let h1 = document.querySelector("h1")
+
+        botao.addEventListener('click', () => {
+            document.body.classList.toggle('escuro')
+            h1.textContent = "🌞 Tema Claro"
+
+            if(document.body.classList.contains('escuro')) {
+                document.body.classList.toggle('claro')
+                h1.textContent = "🌙 Tema Escuro"
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>
