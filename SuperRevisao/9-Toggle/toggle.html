@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modo Claro/Escuro</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      transition: 0.3s;
+    }
+
+    .escuro {
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bem-vindo!</h1>
+  <button id="botaoTema">🌙 Modo Escuro</button>
+
+  <script>
+    let botao = document.querySelector("#botaoTema")
+    let h1 = document.querySelector('h1')
+
+    botao.addEventListener("click", () => {
+      document.body.classList.toggle("escuro")
+
+      if (document.body.classList.contains("escuro")) {
+        h1.textContent = 'Você está no modo escuro'
+        botao.textContent = "☀️ Modo Claro"
+      } else {
+        h1.textContent = 'Você está no modo claro'
+        botao.textContent = "🌙 Modo Escuro"
+      }
+    })
+  </script>
+
+</body>
+</html>

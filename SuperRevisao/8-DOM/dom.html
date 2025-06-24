@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+
+<body>
+    
+    <h1>Lista de Livros</h1>
+
+    <input type="text" name="" id="livro">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="listaLivros"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let livroTxt = document.querySelector("#livro")
+            let livro = livroTxt.value
+            let listaLivros = document.querySelector("#listaLivros")
+
+            let novoLivro = document.createElement('li')
+            let remover = document.createElement('button')
+
+            novoLivro.textContent = livro
+            remover.textContent = 'Remover'
+
+            remover.addEventListener("click", () => {
+                novoLivro.remove()
+            })
+
+            if(livro.length == 0) {
+                alert('Digite o nome de algum livro')
+            } else {
+                listaLivros.appendChild(novoLivro)
+                novoLivro.appendChild(remover)
+            }
+
+            livroTxt.value = ''
+            livroTxt.focus()
+
+        }
+
+    </script>
+
+</body>
+
+</html>

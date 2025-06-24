@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Função Reutilizavel</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="numeros">
+    <button onclick="calcular()">Calcular</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function somaTotal(numeros) {
+            let total = 0
+            numeros.forEach(numero => {
+                total += numero
+            });
+            return total
+        }
+
+        function calcularMedia(numeros) {
+            let somarTotal = somaTotal(numeros)
+            return somarTotal / numeros.length
+        }
+
+        function maiorMenor(numeros) {
+            let numMaior = Math.max(...numeros)
+            let numMenor = Math.min(...numeros)
+            return {
+                numMaior, numMenor
+            }
+        }
+
+        function acimaAbaixoMedia(numeros) {
+            let media = calcularMedia(numeros)
+            let acimaDaMedia = []
+            let abaixoDaMedia = []
+
+            numeros.forEach(numero => {
+                if(numero > media) {
+                    acimaDaMedia.push(numero)
+                } else {
+                    abaixoDaMedia.push(numero)
+                }
+            });
+
+            return {
+                acimaDaMedia, abaixoDaMedia
+            }
+        }
+
+        function calcular() {
+
+            let numerosTxt = document.querySelector("#numeros")
+            let numeros = numerosTxt.value.split(',').map(n => Number(n.trim()))
+
+            let somarTotal = somaTotal(numeros)
+            let calcularAMedia = calcularMedia(numeros)
+            let {numMaior, numMenor} = maiorMenor(numeros)
+            let {acimaDaMedia, abaixoDaMedia} = acimaAbaixoMedia(numeros)
+
+            document.querySelector("#resultado").innerHTML = `
+                <p>Quantia de números: ${numeros.length}</p>
+                <p>Soma total: ${somarTotal}</p>
+                <p>Media: ${calcularAMedia.toFixed(2)}</p>
+                <p>Maior número: ${numMaior}</p>
+                <p>Menor número: ${numMenor}</p>
+                <p>Acima da media: ${acimaDaMedia}</p>
+                <p>Abaixo da media: ${abaixoDaMedia}</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>

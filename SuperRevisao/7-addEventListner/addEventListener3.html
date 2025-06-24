@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener</title>
+</head>
+
+<body>
+    
+    <h1>Modo claro / Modo escuro</h1>
+
+    <button id="botao">Ativar Modo Escuro</button>
+
+    <script>
+
+        let botao = document.querySelector("#botao")
+        let modoEscuro = false // começa como claro
+
+        botao.addEventListener("click", () => {
+        if (modoEscuro) {
+            // Modo Claro
+            document.body.style.backgroundColor = "white"
+            document.body.style.color = "black"
+            botao.textContent = "Ativar Modo Escuro"
+            modoEscuro = false
+        } else {
+            // Modo Escuro
+            document.body.style.backgroundColor = "black"
+            document.body.style.color = "white"
+            botao.textContent = "Ativar Modo Claro"
+            modoEscuro = true
+        }
+        })
+
+    </script>
+
+</body>
+
+</html>
