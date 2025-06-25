@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de pessoas</title>
+</head>
+
+<body>
+    
+    <h1>Lista de Pessoas</h1>
+
+    <div id="resultado"></div>
+    <ul id="lista"></ul>
+
+    <script>
+
+        let pessoas = [
+        { nome: "Ana", idade: 22, profissao: "Designer" },
+        { nome: "Bruno", idade: 17, profissao: "Estudante" },
+        { nome: "Carla", idade: 30, profissao: "Engenheira" },
+        { nome: "Daniel", idade: 15, profissao: "Estudante" },
+        { nome: "Eva", idade: 19, profissao: "Programadora" },
+        { nome: "Felipe", idade: 40, profissao: "Programador" },
+        { nome: "Gabi", idade: 16, profissao: "Estudante" }
+        ]
+
+        let maioresDeIdade = pessoas.filter(i => i.idade >= 18)
+
+        let profissao = pessoas.filter(p => 
+            p.profissao.toLowerCase() === 'programador' || 
+            p.profissao.toLowerCase() === 'programadora'
+        )
+
+        let profissaoNome = profissao.map(n => n.nome)
+
+        console.log(profissaoNome)
+
+        document.querySelector("#resultado").innerHTML = `
+            <p>Total de pessoas: ${pessoas.length}</p>
+            <p>Maiores de idade: ${maioresDeIdade.length}</p>
+            <p>Programadores(as): ${profissao.length}</p>
+            <p>Nomes dos programadores: ${profissaoNome.join(',')}</p>
+        `
+
+        let lista = document.querySelector("#lista")
+
+        pessoas.forEach(pessoa => {
+            let nome = pessoa.nome
+            let profissao = pessoa.profissao
+
+            let novoItem = document.createElement('li')
+            novoItem.innerHTML = `${nome} : ${profissao}`
+            lista.appendChild(novoItem)
+        });
+
+    </script>
+
+</body>
+
+</html>
