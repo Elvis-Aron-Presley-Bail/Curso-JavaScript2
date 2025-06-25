@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays de Objetos</title>
+</head>
+
+<body>
+    
+    <h1>Maiores de idade</h1>
+    <div id="resultado"></div>
+
+    <script>
+
+        let pessoas = [
+        { nome: "Ana", idade: 22 },
+        { nome: "Bruno", idade: 17 },
+        { nome: "Carla", idade: 30 },
+        { nome: "Daniel", idade: 15 },
+        { nome: "Eva", idade: 19 }
+        ]
+
+        let idadePessoas = pessoas.map(p => p.idade)
+
+        let maioresDeIdade = pessoas.filter(i => i.idade >= 18)
+
+        let maioresDeIdadeNome = maioresDeIdade.map(n => n.nome)
+
+        document.querySelector("#resultado").innerHTML = `
+            <p>Total de pessoas: ${pessoas.length}</p>
+            <p>Maiores de idade: ${maioresDeIdade.length}</p>
+            <p>Nome dos maiores de idade: ${maioresDeIdadeNome}</p>
+        `
+
+    </script>
+
+</body>
+
+</html>
