@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splice</title>
+</head>
+
+<body>
+    
+    <h1>🎬 Meus Filmes </h1>
+    <ul id="lista-filmes"></ul>
+
+    <script>
+
+        let filmes = ["Matrix", "Titanic", "Gladiador", "Interestelar", "Clube da Luta"]
+
+        function atualizarTela() {
+            let lista = document.querySelector("#lista-filmes")
+            lista.innerHTML = ''
+
+            filmes.forEach((filme, index) => {
+                let novoFilme = document.createElement('li')
+                novoFilme.textContent = `Filme ${index + 1}: ${filme}`
+
+                let remover = document.createElement('button')
+                remover.textContent = 'Remover'
+                remover.addEventListener('click', () => {
+                    filmes.splice(index, 1)
+                    atualizarTela()
+                })
+
+                let btnSubstituir = document.createElement('button')
+                btnSubstituir.textContent = 'Substituir'
+                btnSubstituir.addEventListener('click', () => {
+                    let novoNome = prompt("Digite o novo nome do filme:")
+                    if (novoNome) {
+                        filmes.splice(index, 1, novoNome)  // 🆕 substitui
+                        atualizarTela()
+                    }
+                })
+
+                lista.appendChild(novoFilme)
+                novoFilme.appendChild(remover)
+                novoFilme.appendChild(btnSubstituir)
+        });
+        }
+
+        atualizarTela()
+
+    </script>
+
+</body>
+
+</html>
