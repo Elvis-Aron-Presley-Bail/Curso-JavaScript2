@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Pessoas</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    input {
+      margin: 5px;
+    }
+    button.remover {
+      margin-left: 10px;
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Cadastro de Pessoas 👥</h1>
+
+  <input type="text" id="nome" placeholder="Nome">
+  <input type="number" id="idade" placeholder="Idade">
+  <input type="text" id="profissao" placeholder="Profissão">
+  <button onclick="adicionarPessoa()">Adicionar</button>
+
+  <h2>Relatório</h2>
+  <div id="relatorio"></div>
+
+  <h2>Lista Completa</h2>
+  <ul id="lista"></ul>
+
+  <script>
+    let pessoas = [
+      { nome: "Ana", idade: 22, profissao: "Designer" },
+      { nome: "Bruno", idade: 17, profissao: "Estudante" },
+      { nome: "Carla", idade: 30, profissao: "Engenheira" },
+      { nome: "Daniel", idade: 15, profissao: "Estudante" },
+      { nome: "Eva", idade: 19, profissao: "Programadora" },
+      { nome: "Felipe", idade: 40, profissao: "Programador" },
+      { nome: "Gabi", idade: 16, profissao: "Estudante" }
+    ]
+
+    function atualizarTela() {
+      // Relatório
+      let maiores = pessoas.filter(p => p.idade >= 18)
+      let programadores = pessoas.filter(p => 
+        p.profissao.toLowerCase() === "programador" ||
+        p.profissao.toLowerCase() === "programadora"
+      )
+      let nomesProgramadores = programadores.map(p => p.nome)
+
+      document.querySelector("#relatorio").innerHTML = `
+        <p>Total de pessoas: ${pessoas.length}</p>
+        <p>Maiores de idade: ${maiores.length}</p>
+        <p>Programadores(as): ${programadores.length}</p>
+        <p>Nomes dos programadores: ${nomesProgramadores.join(', ')}</p>
+      `
+
+      // Lista com botão remover
+      let lista = document.querySelector("#lista")
+      lista.innerHTML = ''
+      pessoas.forEach((pessoa, index) => {
+        let item = document.createElement('li')
+        item.textContent = `${pessoa.nome} - ${pessoa.profissao} (${pessoa.idade} anos)`
+
+        let botaoRemover = document.createElement('button')
+        botaoRemover.textContent = 'Remover'
+        botaoRemover.classList.add('remover')
+
+        botaoRemover.addEventListener('click', () => {
+          pessoas.splice(index, 1)
+          atualizarTela()
+        })
+
+        item.appendChild(botaoRemover)
+        lista.appendChild(item)
+      })
+    }
+
+    function adicionarPessoa() {
+      let nome = document.querySelector("#nome").value.trim()
+      let idade = Number(document.querySelector("#idade").value)
+      let profissao = document.querySelector("#profissao").value.trim()
+
+      if(nome && idade && profissao) {
+        pessoas.push({ nome, idade, profissao })
+        atualizarTela()
+
+        // Limpar campos
+        document.querySelector("#nome").value = ''
+        document.querySelector("#idade").value = ''
+        document.querySelector("#profissao").value = ''
+      } else {
+        alert("Por favor, preencha todos os campos corretamente.")
+      }
+    }
+
+    // Mostrar dados iniciais
+    atualizarTela()
+  </script>
+
+</body>
+</html>
