@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Tarefas</title>
+</head>
+<body>
+
+  <h1>📝 Lista de Tarefas</h1>
+
+  <input id="descricao" placeholder="Descrição da tarefa">
+  <input id="prioridade" placeholder="Prioridade (Alta, Média, Baixa)">
+  <button onclick="adicionarTarefa()">Adicionar</button>
+
+  <ul id="lista-tarefas"></ul>
+
+  <script>
+    let tarefas = []
+
+    function atualizarLista() {
+      let lista = document.querySelector("#lista-tarefas")
+      lista.innerHTML = ""
+
+      tarefas.forEach((tarefa, indice) => {
+        let item = document.createElement("li")
+        item.textContent = `⚠️ ${tarefa.descricao} (Prioridade: ${tarefa.prioridade})`
+
+        let btnEditar = document.createElement("button")
+        btnEditar.textContent = "Editar"
+        btnEditar.addEventListener("click", () => {
+            let novaTarefa = prompt('Insira uma nova tarefa: ')
+            tarefas.splice(indice, 1, novaTarefa)
+            atualizarLista()
+        })
+
+        let btnRemover = document.createElement("button")
+        btnRemover.textContent = "Remover"
+        btnRemover.addEventListener("click", () => {
+          // 👉 remover tarefa
+        })
+
+        let btnMover = document.createElement("button")
+        btnMover.textContent = "Mover para o topo"
+        btnMover.addEventListener("click", () => {
+          // 👉 mover para o topo
+        })
+
+        item.appendChild(btnEditar)
+        item.appendChild(btnRemover)
+        item.appendChild(btnMover)
+        lista.appendChild(item)
+      })
+    }
+
+    function adicionarTarefa() {
+      let descricao = document.querySelector("#descricao").value.trim()
+      let prioridade = document.querySelector("#prioridade").value.trim()
+
+      if (descricao && prioridade) {
+        tarefas.push({ descricao, prioridade })
+        atualizarLista()
+        document.querySelector("#descricao").value = ""
+        document.querySelector("#prioridade").value = ""
+      } else {
+        alert("Preencha os dois campos!")
+      }
+    }
+  </script>
+
+</body>
+</html>
