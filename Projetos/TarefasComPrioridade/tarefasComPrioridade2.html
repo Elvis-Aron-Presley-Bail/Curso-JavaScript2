@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="tarefa">
+    <input type="text" name="" id="prioridade">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+
+        let tarefas = []
+
+        function atualizar() {
+
+            let listaTarefas = document.querySelector('#lista')
+            listaTarefas.innerHTML = ''
+
+            tarefas.forEach((tarefa, index) => {
+                
+                let novaTarefa = document.createElement('li')
+                novaTarefa.textContent = `${tarefa.descricao} (Prioridade: ${tarefa.prioridade})`
+
+                let btnRemover = document.createElement('button')
+                btnRemover.innerHTML = 'Remover'
+                btnRemover.addEventListener('click', () => {
+                    tarefas.splice(index, 1)
+                    atualizar()
+                })
+
+                let btnEditar = document.createElement('button')
+                btnEditar.textContent = 'Adicionar'
+                btnEditar.addEventListener('click', () => {
+                    let mudarTarefa = prompt('Escreva uma nova tarefa')
+                    let mudarPrioridade = prompt('Escreva uma nova prioridade')
+
+                    tarefas[index] = {
+                        descricao : mudarTarefa,
+                        prioridade : mudarPrioridade
+                    }
+
+                    atualizar()
+                })
+
+                let btnMover = document.createElement('button')
+                btnMover.textContent = 'Mover'
+                btnMover.addEventListener('click', () => {
+                    let item = tarefas.splice(index,1)[0]
+                    tarefas.unshift(item)
+                    atualizar()
+                })
+
+                novaTarefa.appendChild(btnRemover)
+                novaTarefa.append(btnEditar)
+                novaTarefa.appendChild(btnMover)
+                listaTarefas.appendChild(novaTarefa)
+
+            });
+
+        }
+
+        function adicionar() {
+            let tarefaTxt = document.querySelector('#tarefa').value.trim()
+            let prioridadeTxt = document.querySelector('#prioridade').value.trim()
+
+            if (tarefaTxt && prioridadeTxt) {
+                tarefas.push({ descricao: tarefaTxt, prioridade: prioridadeTxt })
+                atualizar()
+            } else {
+                alert("Preencha os dois campos!")
+            }
+
+                document.querySelector("#tarefa").value = ""
+                document.querySelector("#prioridade").value = ""
+            }
+
+    </script>
+
+</body>
+
+</html>
