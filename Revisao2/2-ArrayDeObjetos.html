@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descontos em Produtos</title>
+</head>
+<body>
+
+  <h1>🛒 Produtos com Desconto</h1>
+  <input type="number" id="porcentoDesconto">
+  <button onclick="desconto()">Aplicar Desconto</button>
+  <div id="resultado"></div>
+
+  <script>
+    let produtos = [
+      { nome: "Notebook", preco: 2500 },
+      { nome: "Smartphone", preco: 1800 },
+      { nome: "Fone de Ouvido", preco: 150 },
+      { nome: "Monitor", preco: 800 },
+      { nome: "Cadeira Gamer", preco: 1200 }
+    ]
+
+    function desconto() {
+
+    let porcentoDesconto = document.querySelector('#porcentoDesconto').value
+
+    let descontoValor = 1.0
+
+    let resultado = document.querySelector("#resultado")
+    resultado.innerHTML = ''
+
+    // Aplicar 10% de desconto e manter nome/preço
+    let comDesconto = produtos.map(produto => {
+      return {
+        nome: produto.nome,
+        preco: produto.preco * (descontoValor - porcentoDesconto*0.01)
+      }
+    })
+
+    // Produtos com preço abaixo de R$1000
+    let menosQue1000 = comDesconto.filter(p => p.preco < 1000)
+
+    // Primeiro produto com preço abaixo de R$500
+    let menosQue500 = comDesconto.find(p => p.preco < 500)
+
+    // Mostrar no HTML
+
+    resultado.innerHTML = `
+      <h2>Todos com ${porcentoDesconto}% de desconto:</h2>
+      <ul>
+        ${comDesconto.map(p => `<li>${p.nome}:  R$ ${p.preco.toFixed(2)}</li>`).join('')}
+      </ul>
+
+      <h2>💰 Produtos abaixo de R$1000:</h2>
+      <ul>
+        ${menosQue1000.map(p => `<li>${p.nome}: R$ ${p.preco.toFixed(2)}</li>`).join('')}
+      </ul>
+
+      <h2>🔍 Primeiro abaixo de R$500:</h2>
+      <p>${menosQue500 ? `${menosQue500.nome}: R$ ${menosQue500.preco.toFixed(2)}` : "Nenhum produto abaixo de R$500"}</p>
+    `
+
+    }
+
+  </script>
+
+</body>
+</html>
