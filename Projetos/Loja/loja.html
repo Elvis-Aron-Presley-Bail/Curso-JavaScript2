@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja</title>
+</head>
+
+<body>
+    
+    <h1>Loja Virtual</h1>
+
+    <h2>Lista de Produtos</h2>
+
+    <ul id="produtosLista"></ul>
+
+    <div id="carrinhoCompras">
+        <h3>Carrinho de compras</h3>
+    </div>
+    <button onclick="esvaziar()">Esvaziar carrinho</button>
+
+    <script>
+
+        let produtos = [
+        { nome: "Camisa", preco: 50 },
+        { nome: "Tênis", preco: 200 },
+        { nome: "Boné", preco: 30 }
+        ]
+
+        let compras = []
+
+        function atualizarCompras() {
+            let carrinhoCompras = document.querySelector('#carrinhoCompras')
+            carrinhoCompras.innerHTML = `<h3>Carrinho de compras</h3>`
+
+            let totalPreco = 0
+
+            compras.forEach((compra,index) => {
+                let novaCompra = document.createElement('p')
+                novaCompra.textContent = `Nome do Produto: ${compra.nome} || Valor do Produto: ${compra.preco}`
+
+                let removerCompra = document.createElement('button')
+                removerCompra.textContent = 'Remover'
+                removerCompra.addEventListener('click', () => {
+                    compras.splice(index,1)
+                    atualizarCompras()
+                })
+
+                totalPreco += compra.preco
+
+                carrinhoCompras.appendChild(novaCompra)
+                novaCompra.appendChild(removerCompra)
+            });
+
+            console.log(totalPreco)
+            let totalValor = document.createElement('p')
+            totalValor.textContent = `🧾 Valor total: R$ ${totalPreco.toFixed(2)}`
+            carrinhoCompras.appendChild(totalValor)
+
+        }
+
+        produtos.forEach((produto, index) => {
+            let produtosLista = document.querySelector('#produtosLista')
+
+            let novoProduto = document.createElement('li')
+            novoProduto.innerHTML = `Produto: ${produto.nome} || Preço: ${produto.preco}`
+
+            let comprar = document.createElement('button')
+            comprar.textContent = 'Comprar'
+            comprar.addEventListener('click', () => {
+                compras.push(produto)
+                console.log(compras)
+                atualizarCompras()
+            })
+
+            novoProduto.appendChild(comprar)
+            produtosLista.appendChild(novoProduto)
+        });
+
+        function esvaziar() {
+            let carrinhoCompras = document.querySelector('#carrinhoCompras')
+            carrinhoCompras.innerHTML = `<h3>Carrinho de compras</h3>`
+        }
+
+    </script>
+
+</body>
+
+</html>
