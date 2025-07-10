@@ -10,6 +10,7 @@
   <h1>🛒 Produtos com Desconto</h1>
   <input type="number" id="porcentoDesconto">
   <button onclick="desconto()">Aplicar Desconto</button>
+  <button onclick="novoProduto()">Inserir Novo Produto</button>
   <div id="resultado"></div>
 
   <script>
@@ -20,6 +21,24 @@
       { nome: "Monitor", preco: 800 },
       { nome: "Cadeira Gamer", preco: 1200 }
     ]
+
+    function novoProduto() {
+      let nomeProduto = prompt('Insira o nome do Produto:')
+      let valorProduto = Number(prompt('Insira o valor do Produto:'))
+
+      // Verificação simples
+      if (nomeProduto && !isNaN(valorProduto)) {
+        produtos.push({
+          nome: nomeProduto,
+          preco: valorProduto
+        })
+
+        alert(`Produto "${nomeProduto}" adicionado com sucesso!`)
+        desconto()
+      } else {
+        alert("Dados inválidos. Tente novamente.")
+      }
+    }
 
     function desconto() {
 
