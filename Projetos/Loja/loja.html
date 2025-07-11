@@ -17,7 +17,6 @@
     <div id="carrinhoCompras">
         <h3>Carrinho de compras</h3>
     </div>
-    <button onclick="esvaziar()">Esvaziar carrinho</button>
 
     <script>
 
@@ -33,31 +32,48 @@
             let carrinhoCompras = document.querySelector('#carrinhoCompras')
             carrinhoCompras.innerHTML = `<h3>Carrinho de compras</h3>`
 
+            // 1. Agrupar produtos iguais
+            let agrupado = {}
+
+            compras.forEach(item => {
+                if (agrupado[item.nome]) {
+                    agrupado[item.nome].quantidade++
+                } else {
+                    agrupado[item.nome] = {
+                        quantidade: 1,
+                        preco: item.preco
+                    }
+                }
+            })
+
+            // 2. Exibir produtos agrupados
             let totalPreco = 0
 
-            compras.forEach((compra,index) => {
-                let novaCompra = document.createElement('p')
-                novaCompra.textContent = `Nome do Produto: ${compra.nome} || Valor do Produto: ${compra.preco}`
+            for (let nome in agrupado) {
+                let produto = agrupado[nome]
+                let totalProduto = produto.quantidade * produto.preco
+                totalPreco += totalProduto
 
-                let removerCompra = document.createElement('button')
-                removerCompra.textContent = 'Remover'
-                removerCompra.addEventListener('click', () => {
-                    compras.splice(index,1)
-                    atualizarCompras()
-                })
+                let item = document.createElement('p')
+                item.textContent = `${nome} (x${produto.quantidade}) - R$ ${totalProduto.toFixed(2)}`
+                carrinhoCompras.appendChild(item)
+            }
 
-                totalPreco += compra.preco
-
-                carrinhoCompras.appendChild(novaCompra)
-                novaCompra.appendChild(removerCompra)
-            });
-
-            console.log(totalPreco)
+            // 3. Exibir total geral
             let totalValor = document.createElement('p')
             totalValor.textContent = `🧾 Valor total: R$ ${totalPreco.toFixed(2)}`
             carrinhoCompras.appendChild(totalValor)
 
+            // 4. Botão "Esvaziar carrinho"
+            let botaoEsvaziar = document.createElement('button')
+            botaoEsvaziar.textContent = '🗑️ Esvaziar carrinho'
+            botaoEsvaziar.addEventListener('click', () => {
+                compras.splice(0, compras.length)
+                atualizarCompras()
+            })
+            carrinhoCompras.appendChild(botaoEsvaziar)
         }
+
 
         produtos.forEach((produto, index) => {
             let produtosLista = document.querySelector('#produtosLista')
@@ -78,8 +94,8 @@
         });
 
         function esvaziar() {
-            let carrinhoCompras = document.querySelector('#carrinhoCompras')
-            carrinhoCompras.innerHTML = `<h3>Carrinho de compras</h3>`
+            compras.splice(0, compras.length)
+            atualizarCompras()
         }
 
     </script>
