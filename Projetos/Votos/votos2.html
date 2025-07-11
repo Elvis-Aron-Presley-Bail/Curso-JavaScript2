@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <h1>🗳️ Sistema de Votação</h1>
+
+    <button onclick="registrarVoto()">Votar</button>
+    <button onclick="mostrarResultado()">Mostrar Resultado</button>
+    <button onclick="zerarVotos()">Zerar Votação</button>
+
+    <div id="resultado" style="margin-top: 20px;"></div>
+
+    <script>
+
+        let votos = []
+
+        function registrarVoto() {
+            let nomeCandidato = prompt('Digite o nome do Candidato: ')
+
+            if(nomeCandidato.trim() !== '' && nomeCandidato.trim().length !== 0) {
+                votos.push(nomeCandidato)
+                alert(`Candidato '${nomeCandidato}' adicionado com sussesso`)
+            } else {
+                alert('Insira um nome válido')
+            }
+
+            console.log(votos)
+        }
+
+        function mostrarResultado() {
+            let resultado = document.querySelector('#resultado')
+            resultado.innerHTML = ''
+
+            votos.forEach(voto => {
+                let novoCandidato = document.createElement('p').textContent = `
+                    Nome do candidato: ${voto} || Total de votos:
+                `
+            });
+            
+        }
+
+    </script>
+
+</body>
+
+</html>

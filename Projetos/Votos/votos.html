@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Votação</title>
+</head>
+<body>
+
+  <h1>🗳️ Sistema de Votação</h1>
+
+  <button onclick="registrarVoto()">Votar</button>
+  <button onclick="mostrarResultado()">Mostrar Resultado</button>
+  <button onclick="zerarVotos()">Zerar Votação</button>
+
+  <div id="resultado" style="margin-top: 20px;"></div>
+
+  <script>
+    let votos = []
+
+    function registrarVoto() {
+      let nome = prompt("Digite o nome do candidato:")
+
+      if (nome && nome.trim() !== "") {
+        votos.push(nome.trim())
+        alert(`✅ Voto para "${nome}" registrado com sucesso!`)
+      } else {
+        alert("⚠️ Nome inválido. Tente novamente.")
+      }
+    }
+
+    function mostrarResultado() {
+      let resultado = document.querySelector("#resultado")
+      resultado.innerHTML = ''
+
+      if (votos.length === 0) {
+        resultado.innerHTML = "<p>Nenhum voto registrado ainda.</p>"
+        return
+      }
+
+      let contagem = {}
+
+      votos.forEach(nome => {
+        contagem[nome] = (contagem[nome] || 0) + 1
+      })
+
+      let lista = '<h2>🗒️ Resultado:</h2><ul>'
+      for (let nome in contagem) {
+        lista += `<li>${nome}: ${contagem[nome]} voto(s)</li>`
+      }
+      lista += '</ul>'
+      lista += `<p>📊 Total de votos: ${votos.length}</p>`
+
+      resultado.innerHTML = lista
+    }
+
+    function zerarVotos() {
+      votos = []
+      document.querySelector("#resultado").innerHTML = "<p>🧹 Votação zerada.</p>"
+    }
+  </script>
+
+</body>
+</html>
