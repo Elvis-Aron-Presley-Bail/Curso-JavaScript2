@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="texto">
+    <button onclick="contar()">Contar Palavras</button>
+    <ul id="resultado"></ul>
+
+    <script>
+
+        function contar() {
+
+        let contagem = {}
+
+        let texto = document.querySelector('#texto').value
+        let textoTxt = texto.toLowerCase().replace(/[.,!?]/g, '').split(' ')
+        let resultado = document.querySelector('#resultado')
+
+        textoTxt.forEach(palavra => {
+            contagem[palavra] = (contagem[palavra] || 0) + 1
+        });
+
+        let maisRepetida = ''
+        let maiorContagem = 0
+
+        for (let palavra in contagem) {
+            if (contagem[palavra] > maiorContagem) {
+            maiorContagem = contagem[palavra]
+            maisRepetida = palavra
+            }
+        }
+
+        console.log(`Mais repetida: ${maisRepetida} (${maiorContagem} vezes)`)
+
+        for(let palavra in contagem) {
+            resultado.innerHTML += `<li>${palavra}: ${contagem[palavra]}</li>`
+        }
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>

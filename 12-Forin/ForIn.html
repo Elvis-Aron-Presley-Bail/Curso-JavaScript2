@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="texto">
+    <button onclick="contar()">Contar Palavras</button>
+    <ul id="resultado"></ul>
+
+    <script>
+
+        function contar() {
+
+        let palavraQunatidade = {}
+        
+        let texto = document.querySelector('#texto').value
+        let textoTxt = texto.split(' ')
+        let resultado = document.querySelector('#resultado')
+
+        textoTxt.forEach(palavra => {
+            palavraQunatidade[palavra] = (palavraQunatidade[palavra] || 0 ) + 1
+        });
+
+        for (let palavra in palavraQunatidade) {
+            resultado.innerHTML +=  `<li>${palavra}: ${palavraQunatidade[palavra]}.</li>`
+        }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
