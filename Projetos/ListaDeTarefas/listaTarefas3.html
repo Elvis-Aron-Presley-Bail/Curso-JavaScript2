@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <h1>Lista de Tarefas</h1>
+
+    <input type="text" name="" id="novaTarefa">
+    <button onclick="adicionar()">Adicionar</button>
+    <div class="caixa">
+        <h2>Tarefas</h2>
+        <ul id="tarefas"></ul>
+    </div>
+
+    <script>
+
+        function adicionar() {
+
+            let novaTarefa = document.querySelector('#novaTarefa')
+            let tarefaTxt = novaTarefa.value.trim()
+            novaTarefa.value = ''
+            novaTarefa.focus()
+
+            let tarefas = document.querySelector('#tarefas')
+
+            let tarefa = document.createElement('li')
+            tarefa.textContent = tarefaTxt
+
+            let botaoRemover = document.createElement('button')
+            botaoRemover.textContent = 'Remover'
+            botaoRemover.addEventListener('click', () => {
+                tarefa.remove()
+            })
+
+            tarefa.appendChild(botaoRemover)
+            tarefas.appendChild(tarefa)
+
+        }   
+
+    </script>
+
+</body>
+
+</html>
