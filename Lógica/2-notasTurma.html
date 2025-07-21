@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas Turma</title>
+</head>
+
+<body>
+
+    <input type="text" name="" id="notas">
+    <button onclick="verificar()">Verificar</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function verificar() {
+
+            let notasTxt = document.querySelector("#notas").value
+            let notas = notasTxt.split(',').map(n => parseInt(n.trim()))
+
+           
+
+        }
+
+    </script>
+    
+</body>
+
+</html>

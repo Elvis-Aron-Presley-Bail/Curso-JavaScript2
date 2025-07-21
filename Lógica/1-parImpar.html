@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <h1>Par ou Impar</h1>
+
+    <input type="text" name="" id="numeros">
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="res"></div>
+
+    <script>
+
+        function calcular() {
+
+            let numeros = document.querySelector('#numeros').value
+            let num = numeros.split(",").map(n => parseInt(n.trim()))
+
+            let pares = []
+            let impares = []
+
+            num.forEach(numero => {
+                if(numero % 2 == 0) {
+                    pares.push(numero)
+                } else {
+                    impares.push(numero)
+                }
+            });
+            
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
