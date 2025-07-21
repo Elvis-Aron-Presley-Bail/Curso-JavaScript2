@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split</title>
+</head>
+
+<body>
+
+    <input type="text" id="entrada" placeholder="Digite números separados por vírgula">
+    <button onclick="analisar()">Analisar</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function analisar() {
+
+            let entradaTxt = document.querySelector('#entrada').value
+            let entrada = entradaTxt.split(',').map(n => parseInt(n.trim()))
+
+            let maior = Math.max(...entrada)
+            let menor = Math.min(...entrada)
+
+            let total = 0
+
+            let pares = 0
+            let impares = 0
+
+            entrada.forEach(numero => {
+                total += numero
+
+                if(numero % 2 == 0) {
+                    pares ++
+                } else {
+                    impares ++
+                }
+            });
+
+            let media = total / entrada.length
+
+            let resultado = document.querySelector('#resultado').innerHTML = `
+                <p>Maior Número: ${maior}</p>
+                <p>Menor Número: ${menor}</p>
+                <p>Media: ${media.toFixed(2)}</p>
+                <p>Quantia de pares: ${pares}</p>
+                <p>Quantia de impares: ${impares}</p>
+            `
+
+        }
+
+    </script>
+    
+</body>
+
+</html>

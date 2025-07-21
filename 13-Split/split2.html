@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split 2</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="idades" placeholder="Insira as idades:">
+    <button onclick="verificar()">Verificar</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function verificar() {
+
+            let idadeTxt = document.querySelector('#idades').value
+            let idades = idadeTxt.split(',').map(n => parseInt(n.trim()))
+
+            let criancas = 0
+            let adolescentes = 0
+            let adultos = 0
+            let idosos = 0
+            let total = idades.length
+
+            idades.forEach(idade => {
+                
+                if(idade >= 0 && idade <= 12) {
+                    criancas++
+                } else if(idade >= 13 && idade <= 17) {
+                    adolescentes++
+                } else if(idade >= 18 && idade <= 59) {
+                    adultos++
+                } else {
+                    idosos++
+                }
+
+            });
+
+            let resultado = document.querySelector('#resultado').innerHTML = `
+                <p>👶 Crianças: ${criancas}</p>
+                <p>🧒 Adolescentes: ${adolescentes}</p>
+                <p>🧑 Adultas: ${adultos}</p>
+                <p>🧓 Idosas: ${idosos}</p>
+                <p>👥 Total de pessoas: ${total}</p>
+            `
+
+        }
+
+    </script>
+
+</body>
+
+</html>
