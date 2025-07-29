@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <textarea id="comentarios" rows="5" cols="50" placeholder="Digite os comentários aqui..."></textarea>
+    <br>
+    <button onclick="analisar()">Analisar Comentários</button>
+    <div id="resultado"></div>
+
+    <script>
+
+        function analisar() {
+
+            let comentariosTxt = document.querySelector('#comentarios').value
+            let comentarios = comentariosTxt.split(' ').map(c => c.trim().toLowerCase().replace(/[,.!?]/g),'')
+
+            console.log(comentarios)
+
+            //euCurso
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

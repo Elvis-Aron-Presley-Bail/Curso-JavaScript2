@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="texto">
+    <button onclick="calcular()">Calcular</button>
+    <div id="res"></div>
+
+    <script>
+
+        function calcular() {
+
+            let textoTxt = document.querySelector('#texto').value
+            let texto = textoTxt.split(',').map(t => t.trim().toLowerCase())
+
+            let contagem = {}
+
+            texto.forEach(palavra => {
+                contagem[palavra] = (contagem[palavra] || 0) + 1
+            });
+
+            let rank = Object.entries(contagem).sort((a,b) => b[1] - a[1])
+
+            rank.forEach(([fruta,veses]) => {
+
+
+                let res = document.querySelector('#res').innerHTML += `
+                    <p> ${fruta}: ${veses} votos</p>
+                `
+
+            });
+
+            console.log(rank)
+
+        }
+
+    </script>
+
+</body>
+
+</html>
