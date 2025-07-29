@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem</title>
+</head>
+
+<body>
+    
+    <input type="text" id="entrada" placeholder="Digite os votos separados por vírgula">
+    <button onclick="verificar()">Verificar</button>
+    <div id="resultado"></div>
+
+    <script>
+        function verificar() {
+            let entradaTxt = document.querySelector("#entrada").value
+            let entrada = entradaTxt.split(',').map(e => e.trim().toLowerCase())
+
+            let contagem = {}
+
+        entrada.forEach(nome => {
+            if(nome == 'ana' || nome == 'bruno' || nome == 'carla') {
+                contagem[nome] = (contagem[nome] || 0) + 1
+            } else {
+                alert('Digite um nome valido')
+            }
+        })
+
+        let maisVotado = ''
+        let maiorVoto = 0
+
+        for(let nome in contagem) {
+            if(maiorVoto < contagem[nome]) {
+                maiorVoto = contagem[nome]
+                maisVotado = nome
+            }
+        }
+
+
+        let resultadoDiv = document.querySelector('#resultado')
+        resultadoDiv.innerHTML = '' // limpa antes de exibir
+
+        for(let nome in contagem) {
+            if(nome === maisVotado) {
+                resultadoDiv.innerHTML += `<p><strong style="color: green;">${nome.toUpperCase()} (vencedor): ${contagem[nome]}</strong></p>`
+            } else {
+                resultadoDiv.innerHTML += `<p>${nome}: ${contagem[nome]}</p>`
+            }
+        }
+
+            console.log(maisVotado)
+        }
+    </script>
+
+</body>
+
+</html>

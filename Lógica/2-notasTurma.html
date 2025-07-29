@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 
 <body>
 
-    <input type="text" name="" id="notas">
+    <input type="text" name="" id="votos">
     <button onclick="verificar()">Verificar</button>
     <div id="resultado"></div>
 
@@ -16,10 +16,21 @@
 
         function verificar() {
 
-            let notasTxt = document.querySelector("#notas").value
-            let notas = notasTxt.split(',').map(n => parseInt(n.trim()))
+            let votosTxt = document.querySelector('#votos').value
+            let votos = votosTxt.split(',').map(v => parseInt(v.trim()))
 
-           
+            let contagem = {
+                joao : 0,
+                maria : 0,
+                ana : 0
+            }
+
+            contagem.forEach(nome => {
+                contagem[nome] = (contagem[nome] || 0) + 1
+            });
+
+            
+            console.log(contagem)
 
         }
 
