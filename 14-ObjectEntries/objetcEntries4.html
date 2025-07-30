@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .destaque {
+            color: greenyellow;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,11 +23,26 @@
         function analisar() {
 
             let comentariosTxt = document.querySelector('#comentarios').value
-            let comentarios = comentariosTxt.split(' ').map(c => c.trim().toLowerCase().replace(/[,.!?]/g),'')
+            let comentarios = comentariosTxt
+                .toLowerCase()
+                .replace(/[.,!?]/g, '')
+                .split(' ')
+                .map(c => c.trim())
 
-            console.log(comentarios)
+            let contagem = {}
 
-            //euCurso
+            comentarios.forEach(palavra => {
+                contagem[palavra] = (contagem[palavra] || 0) + 1
+            });
+
+            let separados = Object.entries(contagem).sort((a,b) => b[1] - a[1])
+
+            separados.forEach(([palavra, quantia],index) => {
+                let classe = index === 0 ? 'destaque' : ''
+                let resultado = document.querySelector('#resultado').innerHTML += `
+                    <p class=${classe}>${palavra}: ${quantia} vez(es).</p>
+                `
+            });
 
         }
 

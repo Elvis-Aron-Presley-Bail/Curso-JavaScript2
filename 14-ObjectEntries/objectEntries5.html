@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .destaque {
+            color: greenyellow;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <textarea name="" id="texto"></textarea>
+    <button onclick="verificar()">Verificar</button>
+    <div id="res"></div>
+
+    <script>
+
+        function verificar() {
+
+            let textoTxt = document.querySelector('#texto').value
+            let texto = textoTxt.toLowerCase().replace(/[,.!?]/g,'').split(' ').map(p => p.trim())
+
+            let contagem = {}
+
+            texto.forEach(palavra => {
+                contagem[palavra] = (contagem[palavra] || 0) + 1
+            });
+
+            let separar = Object.entries(contagem).sort((a,b) => b[1] - a[1])
+
+            let resultado = document.querySelector('#res')
+            resultado.innerHTML = ''
+
+            separar.forEach(([palavra, vezes],index) => {
+                let classe = index === 0 ? 'destaque' : ''
+                resultado.innerHTML += `
+                    <p class=${classe}>${palavra}: ${vezes} vez(es)</p>
+                `
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
