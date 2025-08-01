@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="produto">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="res"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let produto = document.querySelector('#produto').value.trim()
+            let lista = document.querySelector('#res')
+
+            if (produto === '') return
+
+            let novoProduto = document.createElement('li')
+            novoProduto.textContent = produto
+
+            let quantiaNum = 1
+
+            let quantia = document.createElement('spam')
+            quantia.innerHTML = quantiaNum
+
+            let btnRemover = document.createElement('button')
+            btnRemover.textContent = 'Remover'
+            btnRemover.addEventListener('click', () => {
+                novoProduto.remove()
+            })
+
+            let btnMais = document.createElement('button')
+            btnMais.textContent = '+'
+            btnMais.addEventListener('click', () => {
+                quantiaNum++
+                quantia.innerHTML = quantiaNum
+                console.log(quantiaNum)
+            })
+
+            let btnMenos = document.createElement('button')
+            btnMenos.textContent = '-'
+            btnMenos.addEventListener('click', () => {
+                quantiaNum--
+                quantia.innerHTML = quantiaNum
+                if(quantiaNum < 1) {
+                    novoProduto.remove()
+                }
+                console.log(quantiaNum)
+            })
+
+            lista.appendChild(novoProduto)
+            novoProduto.appendChild(btnRemover)
+            novoProduto.appendChild(quantia)
+            novoProduto.appendChild(btnMais)
+            novoProduto.appendChild(btnMenos)
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Tarefas</title>
+</head>
+<body>
+
+  <input type="text" id="tarefa" placeholder="Digite uma tarefa">
+  <button id="adicionar">Adicionar</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    document.querySelector('#adicionar').addEventListener('click', function () {
+    let texto = document.querySelector('#tarefa').value.trim()
+    
+    if (texto === '') return
+
+    let li = document.createElement('li')
+    li.textContent = texto
+
+    let botao = document.createElement('button')
+    botao.textContent = 'Remover'
+    botao.addEventListener('click', function () {
+        li.remove()
+    })
+
+    li.appendChild(botao)
+    document.querySelector('#lista').appendChild(li)
+
+    document.querySelector('#tarefa').value = ''
+    })
+
+  </script>
+
+</body>
+</html>
