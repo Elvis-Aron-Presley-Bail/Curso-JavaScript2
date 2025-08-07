@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+</head>
+
+<body>
+    
+    <input type="text" id="produto" placeholder="Digite o nome do produto">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="res"></ul>
+
+    <script>
+        function adicionar() {
+            let produto = document.querySelector('#produto').value.trim().toLowerCase()
+            let lista = document.querySelector('#res')
+
+            if (produto === '') return
+
+            // Verificar se o produto já existe na lista
+            let itens = lista.querySelectorAll('li')
+            for (let item of itens) {
+                let nome = item.dataset.nome
+                if (nome === produto) {
+                    let span = item.querySelector('span')
+                    span.textContent = parseInt(span.textContent) + 1
+                    document.querySelector('#produto').value = ''
+                    return
+                }
+            }
+
+            // Criar novo item
+            let novoProduto = document.createElement('li')
+            novoProduto.dataset.nome = produto
+
+            let quantiaNum = 1
+
+            let nomeTexto = document.createElement('strong')
+            nomeTexto.textContent = produto + ': '
+
+            let quantia = document.createElement('span')
+            quantia.textContent = quantiaNum
+
+            let btnMais = document.createElement('button')
+            btnMais.textContent = '+'
+            btnMais.addEventListener('click', () => {
+                quantiaNum++
+                quantia.textContent = quantiaNum
+            })
+
+            let btnMenos = document.createElement('button')
+            btnMenos.textContent = '-'
+            btnMenos.addEventListener('click', () => {
+                if (quantiaNum > 1) {
+                    quantiaNum--
+                    quantia.textContent = quantiaNum
+                }
+            })
+
+            let btnRemover = document.createElement('button')
+            btnRemover.textContent = '🗑️'
+            btnRemover.addEventListener('click', () => {
+                novoProduto.remove()
+            })
+
+            novoProduto.appendChild(nomeTexto)
+            novoProduto.appendChild(quantia)
+            novoProduto.appendChild(btnMais)
+            novoProduto.appendChild(btnMenos)
+            novoProduto.appendChild(btnRemover)
+
+            lista.appendChild(novoProduto)
+
+            document.querySelector('#produto').value = ''
+        }
+    </script>
+
+</body>
+</html>

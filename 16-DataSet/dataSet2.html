@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <input type="text" name="" id="nome">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="res"></ul>
+
+    <script>
+
+        function adicionar() {
+
+            let pessoa = document.querySelector('#nome').value.toLowerCase().trim()
+            let lista = document.querySelector('#res')
+
+            let itens = lista.querySelectorAll('li')
+            for (let item of itens) {
+                let nome = item.dataset.nome
+                if (nome === pessoa) {
+                    let span = item.querySelector('span')
+                    span.textContent = parseInt(span.textContent) + 1
+                    document.querySelector('#produto').value = ''
+                    return
+                }
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
