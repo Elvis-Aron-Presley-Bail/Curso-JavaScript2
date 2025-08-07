@@ -27,16 +27,11 @@
 
             valores.innerHTML = ''
 
-            lista.forEach(valor => {
-                if(numero == valor) {
-                    alert('Valor já adicionado')
-                    
-                }
-            });
-
-            if (numero === '') return
-
-            lista.push(numero)
+            if(lista.includes(numero)) {
+                alert('Valor já adicionado')
+            } else {
+                lista.push(numero)
+            }
 
             lista.forEach(valor => {
                 let novoValor = document.createElement('li')
